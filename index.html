@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flores Amarillas para Ti 🌻</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0b0b1a;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    p {
+      color: #eaeaea;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Contenedor de flores */
+    .flower-container {
+      position: relative;
+      width: 300px;
+      height: 350px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    /* Tallo y hojas */
+    .stem {
+      width: 10px;
+      height: 180px;
+      background-color: #2e8b57;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .leaf {
+      position: absolute;
+      width: 40px;
+      height: 20px;
+      background-color: #3cb371;
+      border-radius: 20px 0;
+    }
+
+    .leaf.left {
+      left: -35px;
+      top: 60px;
+      transform: rotate(-30deg);
+    }
+
+    .leaf.right {
+      right: -35px;
+      top: 100px;
+      transform: rotate(30deg) scaleX(-1);
+    }
+
+    /* Cabeza de la Flor */
+    .flower-head {
+      position: absolute;
+      top: 40px;
+      width: 120px;
+      height: 120px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .center {
+      position: absolute;
+      top: 35px;
+      left: 35px;
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #8b4513, #5a2d0c);
+      border-radius: 50%;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .petal {
+      position: absolute;
+      top: 10px;
+      left: 45px;
+      width: 30px;
+      height: 100px;
+      background: linear-gradient(to top, #ffae00, #ffea00);
+      border-radius: 50%;
+      transform-origin: center center;
+    }
+
+    /* Rotación de 8 pétalos */
+    .petal:nth-child(1) { transform: rotate(0deg); }
+    .petal:nth-child(2) { transform: rotate(45deg); }
+    .petal:nth-child(3) { transform: rotate(90deg); }
+    .petal:nth-child(4) { transform: rotate(135deg); }
+    .petal:nth-child(5) { transform: rotate(180deg); }
+    .petal:nth-child(6) { transform: rotate(225deg); }
+    .petal:nth-child(7) { transform: rotate(270deg); }
+    .petal:nth-child(8) { transform: rotate(315deg); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+    }
+
+    /* Mensaje Dedicatoria */
+    .card {
+      margin-top: 20px;
+      padding: 15px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      max-width: 80%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌻 Para Alguien Especial 🌻</h1>
+  <p>¡Feliz día de las Flores Amarillas!</p>
+
+  <div class="flower-container">
+    <div class="stem">
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+    </div>
+    <div class="flower-head">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="center"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p id="dedicatoria">"Nunca olvides lo especial e importante que eres para mí."</p>
+  </div>
+
+  <script>
+    // Permite cambiar la dedicatoria dinámicamente mediante el enlace
+    // Ejemplo: tudominio.com/?mensaje=Te+amo+mucho
+    const urlParams = new URLSearchParams(window.location.search);
+    const mensajeCustom = urlParams.get('mensaje');
+    if (mensajeCustom) {
+      document.getElementById('dedicatoria').textContent = mensajeCustom;
+    }
+  </script>
+</body>
+</html>
