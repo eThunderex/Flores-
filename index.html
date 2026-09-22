@@ -5,167 +5,310 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flores Amarillas para Ti 🌻</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       background-color: #0b0b1a;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow: hidden;
+      color: #fff;
     }
 
-    h1 {
-      color: #ffd700;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-      margin-bottom: 5px;
-      text-align: center;
+    /* Fondo animado de estrellas/luces */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    p {
-      color: #eaeaea;
-      font-size: 1.1rem;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    /* Contenedor de flores */
-    .flower-container {
-      position: relative;
-      width: 300px;
-      height: 350px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-    }
-
-    /* Tallo y hojas */
-    .stem {
-      width: 10px;
-      height: 180px;
-      background-color: #2e8b57;
-      border-radius: 5px;
-      position: relative;
-    }
-
-    .leaf {
+    .star {
       position: absolute;
-      width: 40px;
-      height: 20px;
-      background-color: #3cb371;
-      border-radius: 20px 0;
-    }
-
-    .leaf.left {
-      left: -35px;
-      top: 60px;
-      transform: rotate(-30deg);
-    }
-
-    .leaf.right {
-      right: -35px;
-      top: 100px;
-      transform: rotate(30deg) scaleX(-1);
-    }
-
-    /* Cabeza de la Flor */
-    .flower-head {
-      position: absolute;
-      top: 40px;
-      width: 120px;
-      height: 120px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .center {
-      position: absolute;
-      top: 35px;
-      left: 35px;
-      width: 50px;
-      height: 50px;
-      background: radial-gradient(circle, #8b4513, #5a2d0c);
+      background: #ffd700;
       border-radius: 50%;
-      z-index: 10;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* Flores Amarillas de fondo */
+    .flowers-bg {
+      position: fixed;
+      bottom: -20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    .flower {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: bottom center;
+      animation: sway 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes sway {
+      0% { transform: rotate(-3deg); }
+      100% { transform: rotate(3deg); }
+    }
+
+    .flower-head {
+      position: relative;
+      width: 80px;
+      height: 80px;
     }
 
     .petal {
       position: absolute;
-      top: 10px;
-      left: 45px;
+      top: 5px;
+      left: 30px;
+      width: 20px;
+      height: 35px;
+      background: linear-gradient(to top, #ff9100, #ffea00);
+      border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+      transform-origin: bottom center;
+    }
+
+    /* Pétalos rotados */
+    .p1 { transform: rotate(0deg); }
+    .p2 { transform: rotate(45deg); }
+    .p3 { transform: rotate(90deg); }
+    .p4 { transform: rotate(135deg); }
+    .p5 { transform: rotate(180deg); }
+    .p6 { transform: rotate(225deg); }
+    .p7 { transform: rotate(270deg); }
+    .p8 { transform: rotate(315deg); }
+
+    .center-circle {
+      position: absolute;
+      top: 25px;
+      left: 25px;
       width: 30px;
-      height: 100px;
-      background: linear-gradient(to top, #ffae00, #ffea00);
+      height: 30px;
+      background: #5c2c06;
       border-radius: 50%;
-      transform-origin: center center;
     }
 
-    /* Rotación de 8 pétalos */
-    .petal:nth-child(1) { transform: rotate(0deg); }
-    .petal:nth-child(2) { transform: rotate(45deg); }
-    .petal:nth-child(3) { transform: rotate(90deg); }
-    .petal:nth-child(4) { transform: rotate(135deg); }
-    .petal:nth-child(5) { transform: rotate(180deg); }
-    .petal:nth-child(6) { transform: rotate(225deg); }
-    .petal:nth-child(7) { transform: rotate(270deg); }
-    .petal:nth-child(8) { transform: rotate(315deg); }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(3deg); }
+    .stem {
+      width: 6px;
+      height: 120px;
+      background: #2e8b57;
     }
 
-    /* Mensaje Dedicatoria */
-    .card {
-      margin-top: 20px;
-      padding: 15px 25px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(5px);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 215, 0, 0.3);
-      max-width: 80%;
+    /* Contenedor del Sobre interactivo */
+    .container {
+      position: relative;
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    .envelope-wrapper {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      background-color: #f2a900;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* Solapa superior del sobre */
+    .envelope-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-top: 110px solid #ffd700;
+      transform-origin: top;
+      transition: transform 0.5s ease-in-out, z-index 0.5s;
+      z-index: 5;
+    }
+
+    /* Solapas inferiores/laterales */
+    .envelope-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-left: 150px solid #e09600;
+      border-right: 150px solid #e09600;
+      border-bottom: 100px solid #d48b00;
+      border-radius: 0 0 10px 10px;
+      z-index: 4;
+    }
+
+    /* Carta dentro del sobre */
+    .letter {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+      width: 270px;
+      height: 180px;
+      background: #fff;
+      color: #333;
+      border-radius: 8px;
+      padding: 15px;
       text-align: center;
+      transition: transform 0.6s ease-in-out, opacity 0.5s;
+      z-index: 3;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .letter h2 {
+      color: #d48b00;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .letter p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #444;
+    }
+
+    /* Sello/Corazón interactivo */
+    .heart-seal {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: #ff4757;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 6;
+      transition: opacity 0.4s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .heart-seal::before {
+      content: '💛';
+      font-size: 1.2rem;
+    }
+
+    /* Estado de Apertura al hacer clic */
+    .container.open .envelope-wrapper::before {
+      transform: rotateX(180deg);
+      z-index: 2;
+    }
+
+    .container.open .letter {
+      transform: translateY(-130px) scale(1.1);
+      z-index: 10;
+      height: auto;
+      min-height: 200px;
+    }
+
+    .container.open .heart-seal {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Instrucción en pantalla */
+    .hint {
+      position: absolute;
+      bottom: -40px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ffd700;
+      letter-spacing: 1px;
     }
   </style>
 </head>
 <body>
 
-  <h1> Para mi Wawa Hermosa 🌻</h1>
-  <p>¡Feliz día de las Flores Amarillas!</p>
+  <!-- Fondo estrellado -->
+  <div class="stars" id="starsContainer"></div>
 
-  <div class="flower-container">
-    <div class="stem">
-      <div class="leaf left"></div>
-      <div class="leaf right"></div>
+  <!-- Flores de fondo -->
+  <div class="flowers-bg">
+    <div class="flower">
+      <div class="flower-head">
+        <div class="petal p1"></div><div class="petal p2"></div>
+        <div class="petal p3"></div><div class="petal p4"></div>
+        <div class="petal p5"></div><div class="petal p6"></div>
+        <div class="petal p7"></div><div class="petal p8"></div>
+        <div class="center-circle"></div>
+      </div>
+      <div class="stem"></div>
     </div>
-    <div class="flower-head">
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="center"></div>
+    <div class="flower">
+      <div class="flower-head">
+        <div class="petal p1"></div><div class="petal p2"></div>
+        <div class="petal p3"></div><div class="petal p4"></div>
+        <div class="petal p5"></div><div class="petal p6"></div>
+        <div class="petal p7"></div><div class="petal p8"></div>
+        <div class="center-circle"></div>
+      </div>
+      <div class="stem"></div>
     </div>
   </div>
 
-  <div class="card">
-    <p id="dedicatoria"> &#10024; Nunca olvides lo especial e importante que eres para mí y lo mucho que te amo mi niña hermosa. Quiero demostrarte cuanto te amo todos los dias de mi vida. &#10084;&#65039;</p>
+  <!-- Sobre interactivo -->
+  <div class="container" id="envelopeContainer">
+    <div class="envelope-wrapper">
+      <div class="heart-seal"></div>
+      <div class="letter">
+        <h2>🌻 ¡Para Ti! 🌻</h2>
+        <p id="dedicatoria">"Te entrego estas flores amarillas para recordarte lo especial e importante que eres en mi vida. ¡Gracias por existir!"</p>
+      </div>
+    </div>
+    <div class="hint">Haz clic sobre el sobre para abrirlo ✨</div>
   </div>
 
   <script>
-    // Permite cambiar la dedicatoria dinámicamente mediante el enlace
-    // Ejemplo: tudominio.com/?mensaje=Te+amo+mucho
+    // Generar estrellas animadas
+    const starsContainer = document.getElementById('starsContainer');
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.width = `${Math.random() * 3 + 1}px`;
+      star.style.height = star.style.width;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 2}s`;
+      starsContainer.appendChild(star);
+    }
+
+    // Evento para abrir/cerrar la carta al hacer clic o tocar
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    envelopeContainer.addEventListener('click', () => {
+      envelopeContainer.classList.toggle('open');
+    });
+
+    // Permitir mensaje personalizado por la URL (?mensaje=Tu+Texto)
     const urlParams = new URLSearchParams(window.location.search);
-    const mensajeCustom = urlParams.get('mensaje');
-    if (mensajeCustom) {
-      document.getElementById('dedicatoria').textContent = mensajeCustom;
+    const mensaje = urlParams.get('mensaje');
+    if (mensaje) {
+      document.getElementById('dedicatoria').textContent = `"${mensaje}"`;
     }
   </script>
 </body>
